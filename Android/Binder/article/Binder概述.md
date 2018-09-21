@@ -1,0 +1,16 @@
+# Binder概述
+
+Binder是Android系统提供的一种IPC（进程间通信）机制。由于Android是基于Linux内核的，因此，除了Binder以外，还存在其他的IPC机制，例如管道和socket或pipe等。Binder相对于其他IPC机制来说，就更加灵活和方便了。
+
+Android系统基本上可以看作是一个基于Binder通信的C/S架构。Binder就像网络一样，把系统的各个部分连接在了一起。
+
+在基于Binder通信的C/S架构体系中，除了C/S架构所包括的Client端和Server端外，Android还有一个全局的ServiceManager端，它的作用是管理系统中的各种服务（Service）。
+
+> 一个Service进程可以注册多个Service，就像即将讲解的MediaService一样
+
+* Server进程要先注册一些Service到serviceManager中，所以Server是ServiceManager的客户端，而ServiceManager就是服务端了。
+* 如果某个Client进程要使用某个Service，必须先到ServiceManager中获取该Service的相关信息，所以Client是ServiceManager的客户端。
+* Client根据得到的Service信息与Service所在的Server进程建立通信的通路，然后就可以直接与Service交互了，所以Client也是Server的客户端。
+* 最重要的一点是，三者的交互都是基于Binder通信的，所以通过任意两者的关系，都可以揭示Binder的奥秘。
+
+这里要重点强调的是，Binder通信与C/S架构之间的关系。Binder只是为C/S架构提供了一种通信的方式，我们完全可以采用其他IPC方式进行通信，例如Socket或者Pipe
