@@ -126,7 +126,7 @@ public final class Retrofit {
 
                     /**
                      * 所有接口方法的调用都会集中到这里进行处理
-                     * @param proxy 接口对象
+                     * @param proxy 实现要代理接口的动态代理对象
                      * @param method 调用的接口方法
                      * @param args 接口方法参数
                      */
